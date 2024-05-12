@@ -53,7 +53,7 @@ int main() {
   printf("\n\n");
 
   printf("Matrix:\n");
-  for (int i = 1; i < sLen + 1; i++) {
+  for (int i = 0; i < sLen + 0; i++) {
     for (int j = 0; j < col; j++) {
       printf("%d ", mat[i][j]);
     }
