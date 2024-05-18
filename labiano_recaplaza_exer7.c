@@ -23,13 +23,13 @@ int main() {
   int col = k + 1;
   int mat[sLen + 1][col];
 
-  // Initialize the matrix
+  // initialize the matrix
   for (int i = 0; i <= sLen; i++) {
     for (int j = 0; j <= k; j++) {
       if (j == 0) {
-        mat[i][j] = 1; // Sum of 0 can always be made with the empty subset
+        mat[i][j] = 1; // sum of 0 can always be made with the empty subset
       } else {
-        mat[i][j] = 0; // Initial assumption: no sum can be made
+        mat[i][j] = 0; // initial assumption: no sum can be made
       }
     }
   }
