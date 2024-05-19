@@ -43,7 +43,7 @@ void subsetsum(int *arr, int sum, int arrLen) {
       if (move == arrLen + 1) // reached end of array
       {
         int partialSum = 0;
-        for (i = 1; i < move; i++)
+        for (i = 1; i < move; i++)      //get sum of the tos
           partialSum += arr[option[i][nopts[i]]];
 
         if (partialSum == sum) {
@@ -52,7 +52,6 @@ void subsetsum(int *arr, int sum, int arrLen) {
             printf("%i", arr[option[j][nopts[j]]]); // print the top of stacks
             if (j != move-1) printf(", ");
           }
-            
           printf(" }");
           printf("\n");
           validSubsets++;
@@ -71,7 +70,7 @@ void subsetsum(int *arr, int sum, int arrLen) {
         }
       }
 
-      if (nopts[move] == 0) { // if stack is empty, simply print the tos
+      if (nopts[move] == 0) { // if stack is empty, print the tos when partialSum == sum
         int partialSum = 0;
         for (i = 1; i < move; i++)
           partialSum += arr[option[i][nopts[i]]];
