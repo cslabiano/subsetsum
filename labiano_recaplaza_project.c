@@ -14,6 +14,7 @@ void subsetsum(int *arr, int sum, int arrLen) {
   int nopts[arrLen + 2];              // array of top of stacks
   int option[arrLen + 2][arrLen + 2]; // array of stacks of options
   int i, candidate, currentSum;
+  int validSubsets = 0;
 
   move = start = 0;
   nopts[start] = 1;
@@ -46,9 +47,15 @@ void subsetsum(int *arr, int sum, int arrLen) {
           partialSum += arr[option[i][nopts[i]]];
 
         if (partialSum == sum) {
-          for (int j = 1; j < move; j++)
-            printf("%i ", arr[option[j][nopts[j]]]); // print the top of stacks
+          printf("{ ");
+          for (int j = 1; j < move; j++) {
+            printf("%i", arr[option[j][nopts[j]]]); // print the top of stacks
+            if (j != move-1) printf(", ");
+          }
+            
+          printf(" }");
           printf("\n");
+          validSubsets++;
         }
 
         move--; // go back to previous stack and pop tos
@@ -70,15 +77,22 @@ void subsetsum(int *arr, int sum, int arrLen) {
           partialSum += arr[option[i][nopts[i]]];
 
         if (partialSum == sum) {
-          for (i = 1; i < move; i++)
-            printf("%i ", arr[option[i][nopts[i]]]);
+          printf("{ ");
+          for (i = 1; i < move; i++) {
+            printf("%i", arr[option[i][nopts[i]]]);
+            if (i != move-1) printf(", ");
+          }
+            
+          printf(" }");
           printf("\n");
+          validSubsets++;
         }
         move--; // go back to previous stack and pop tos
         nopts[move]--;
       }
     }
   }
+  printf("Total number of valid subsets: %d\n", validSubsets);
 }
 
 int main() {
@@ -88,7 +102,7 @@ int main() {
   FILE *fp = fopen("input.txt", "r");
   if (fp != NULL) {
     sets = atoi(fgets(str, sizeof(str), fp));
-    printf("No of sets: %d\n", sets); // =======print for checking only=========
+    printf("No of sets: %d\n\n", sets); // =======print for checking only=========
 
     for (int i = 0; i < sets; i++) {
       sum = atoi(fgets(str, sizeof(str), fp));
@@ -119,6 +133,8 @@ int main() {
       printf("Subsets:\n");
       subsetsum(arr, sum, index);
       free(arr);
+
+      printf("\n");
     }
   }
   free(str);
