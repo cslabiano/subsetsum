@@ -92,7 +92,8 @@ void subsetsum(int *arr, int sum, int arrLen) {
       }
     }
   }
-  printf("Total number of valid subsets: %d\n", validSubsets);
+  if(validSubsets == 0) printf("There are no subsets that are equal to the sum.\n");
+  else printf("Total number of valid subsets: %d\n", validSubsets);
 }
 
 int main() {
