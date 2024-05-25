@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int comp(const void *a, const void *b) {
   int *x, *y;
@@ -10,6 +11,11 @@ int comp(const void *a, const void *b) {
 }
 
 void subsetsum(int *arr, int sum, int arrLen) {
+  // timer
+  double t;
+  clock_t t1, t2;
+  t1 = clock();
+
   int start, move;
   int nopts[arrLen + 2];              // array of top of stacks
   int option[arrLen + 2][arrLen + 2]; // array of stacks of options
@@ -43,14 +49,15 @@ void subsetsum(int *arr, int sum, int arrLen) {
       if (move == arrLen + 1) // reached end of array
       {
         int partialSum = 0;
-        for (i = 1; i < move; i++)      //get sum of the tos
+        for (i = 1; i < move; i++) // get sum of the tos
           partialSum += arr[option[i][nopts[i]]];
 
         if (partialSum == sum) {
           printf("{ ");
           for (int j = 1; j < move; j++) {
             printf("%i", arr[option[j][nopts[j]]]); // print the top of stacks
-            if (j != move-1) printf(", ");
+            if (j != move - 1)
+              printf(", ");
           }
           printf(" }");
           printf("\n");
@@ -79,9 +86,10 @@ void subsetsum(int *arr, int sum, int arrLen) {
           printf("{ ");
           for (i = 1; i < move; i++) {
             printf("%i", arr[option[i][nopts[i]]]);
-            if (i != move-1) printf(", ");
+            if (i != move - 1)
+              printf(", ");
           }
-            
+
           printf(" }");
           printf("\n");
           validSubsets++;
@@ -91,8 +99,15 @@ void subsetsum(int *arr, int sum, int arrLen) {
       }
     }
   }
-  if(validSubsets == 0) printf("There are no subsets that are equal to the sum.\n");
-  else printf("Total number of valid subsets: %d\n", validSubsets);
+  if (validSubsets == 0)
+    printf("There are no subsets that are equal to the sum.\n");
+  else
+    printf("Total number of valid subsets: %d\n", validSubsets);
+
+  t2 = clock(); // clock_t
+  t = (double)(t2 - t1) / (double)CLOCKS_PER_SEC;
+
+  printf("\nTime elapsed: %f\n", t);
 }
 
 int main() {
